@@ -18,6 +18,7 @@ CREATE TABLE productos (
     stock INT NOT NULL,
     precio DECIMAL(10, 2) NOT NULL
 );
+
 -- Insertar usuarios por defecto del sistema
 INSERT INTO usuarios (nombre_completo, usuario, password, rol) VALUES
 ('Administrador Principal', 'admin', 'admin123', 'Administrador'),
@@ -29,3 +30,11 @@ INSERT INTO productos (nombre_producto, categoria, stock, precio) VALUES
 ('Mouse Inalámbrico Logitech', 'Accesorios', 25, 15.50),
 ('Impresora Epson EcoTank', 'Oficina', 5, 210.00),
 ('Resma de Papel Tamaño Carta', 'Papelería', 100, 4.25);
+
+-- CONSULTAS DE PRÁCTICA DEL MÓDULO (Guía 9)
+
+-- Actualización simultánea de precio y stock:
+-- UPDATE productos SET precio = 720.00, stock = 15 WHERE id = 1;
+
+-- Eliminación de producto descontinuado:
+-- DELETE FROM productos WHERE id = 4;
