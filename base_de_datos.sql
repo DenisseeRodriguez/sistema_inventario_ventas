@@ -46,3 +46,22 @@ INSERT INTO productos (nombre_producto, categoria_id, stock, precio) VALUES
 -- 2. Vista filtrada exclusivamente para el departamento de 'Accesorios':
 -- SELECT p.id, p.nombre_producto, c.nombre_categoria, p.stock, p.precio FROM productos p
 -- INNER JOIN categorias c ON p.categoria_id = c.id WHERE c.nombre_categoria = 'Accesorios';
+
+
+
+-- Tarjeta 1: Total de artículos distintos en el catálogo (Muestra variedad de productos)
+SELECT COUNT(id) AS total_productos_catalogo FROM productos;
+
+-- Tarjeta 2: Valor económico total del inventario (Multiplica precio por existencias de cada fila
+y las suma)
+SELECT SUM(precio * stock) AS valor_monetario_inventario FROM productos;
+
+
+-- Tarjeta 3: Precio del producto estrella o de mayor gama del inventario
+SELECT MAX(precio) AS producto_mas_caro FROM productos;
+
+-- Tarjeta 4: Reporte de unidades físicas totales en existencia agrupadas por categoría
+SELECT c.nombre_categoria, SUM(p.stock) AS existencias_totales
+FROM productos p
+INNER JOIN categorias c ON p.categoria_id = c.id
+GROUP BY c.nombre_categoria;
