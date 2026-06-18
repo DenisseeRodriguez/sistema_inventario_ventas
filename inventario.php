@@ -12,9 +12,9 @@ require_once 'conexion.php';
 
 // 3. Consulta SQL con INNER JOIN
 $sql = "SELECT p.id, p.nombre_producto, c.nombre_categoria, p.stock, p.precio
-        FROM productos p
-        INNER JOIN categorias c ON p.categoria_id = c.id
-        ORDER BY p.id ASC";
+FROM productos p
+INNER JOIN categorias c ON p.id = c.id
+ORDER BY p.id ASC";
 
 // 4. Ejecutar consulta
 $resultado = $conn->query($sql);
@@ -23,7 +23,7 @@ $resultado = $conn->query($sql);
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
+<    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventario - Sistema de Ventas</title>
 
@@ -104,6 +104,8 @@ $resultado = $conn->query($sql);
 
     <div class="header">
         <h2>Catálogo de Inventario</h2>
+        <a href="nuevo_producto.php" style="background: #3b82f6; color: white; padding: 10px;
+text-decoration: none; border-radius: 5px;">+ Nuevo Producto</a>
 
         <div>
             <span>Usuario:
