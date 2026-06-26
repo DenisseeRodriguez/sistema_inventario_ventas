@@ -26,6 +26,7 @@ $resultado = $conn->query($sql);
 <    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventario - Sistema de Ventas</title>
+    
 
     <style>
         body{
@@ -126,6 +127,7 @@ text-decoration: none; border-radius: 5px;">+ Nuevo Producto</a>
                 <th>Categoría</th>
                 <th>Stock</th>
                 <th>Precio Unitario</th>
+                <th>Acciones/th>
             </tr>
         </thead>
 
@@ -149,6 +151,15 @@ text-decoration: none; border-radius: 5px;">+ Nuevo Producto</a>
                 <td>
                     $<?php echo number_format($fila['precio'], 2); ?>
                 </td>
+                <td>
+                <a href="eliminar_producto.php?id=<?php echo $fila['id']; ?>"
+            class="btn-eliminar"
+            onclick="return confirm('¿Estás absolutamente seguro de eliminar el producto: <?php
+            echo $fila['nombre_producto']; ?>?');">
+            🗑️ Eliminar
+            </a>
+             </td>
+        
             </tr>
 
             <?php
