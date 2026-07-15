@@ -159,7 +159,13 @@ text-decoration: none; border-radius: 5px;">+ Nuevo Producto</a>
             🗑️ Eliminar
             </a>
              </td>
-        
+        <td>
+  <!-- NUEVO BOTÓN DE EDITAR -->
+  <a href="editar_producto.php?id=<?php echo $fila['id']; ?>" class="btn-editar">Editar</a>
+  
+  <!-- Botón de eliminar (ya lo tenías) -->
+  <a href="eliminar_producto.php?id=<?php echo $fila['id']; ?>" class="btn-eliminar" onclick="return confirm('¿Seguro?');">Eliminar</a>
+</td>
             </tr>
 
             <?php
