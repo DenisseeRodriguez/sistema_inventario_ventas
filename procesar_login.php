@@ -1,68 +1,83 @@
 <?php
-// 1. Iniciar el motor de sesiones de PHP para recordar al usuario
+
+// 1. Iniciar el motor de sesiones
 session_start();
 
-// 2. Incluir nuestra conexión oficial segura de MySQLi
+// 2. Incluir la conexión a la base de datos
 require_once 'conexion.php';
 
-// 3. Validar que la información provenga estrictamente del formulario POST
+// 3. Validar que la información venga del formulario POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Obtener y limpiar ligeramente los datos enviados por el usuario
+
+    // Obtener los datos enviados
     $user = trim($_POST['usuario']);
     $password = trim($_POST['password']);
 
     try {
-        // 4. Diseñar la consulta con marcadores de posición (?)
-        $sql = "SELECT id, nombre_completo, password, rol FROM usuarios WHERE usuario = ?";
-        
-        // 5. Preparar la sentencia en el servidor de base de datos
+
+        // 4. Consulta segura con marcador de posición
+        $sql = "SELECT id, nombre_completo, password, rol 
+                FROM usuarios 
+                WHERE usuario = ?";
+
+        // 5. Preparar la consulta
         $stmt = $conn->prepare($sql);
-        
-        // 6. Vincular el parámetro de usuario de tipo string ("s")
+
+        // 6. Vincular el usuario
         $stmt->bind_param("s", $user);
-        
-        // 7. Ejecutar la sentencia preparada de forma segura
+
+        // 7. Ejecutar la consulta
         $stmt->execute();
-        
-        // Obtener el resultado de la consulta
+
+        // Obtener el resultado
         $result = $stmt->get_result();
-        
-        // 8. Verificar si encontramos un usuario registrado con ese nombre
+
+        // 8. Verificar si existe el usuario
         if ($result->num_rows === 1) {
-            // Extraer los datos del usuario en un arreglo asociativo
+
+            // Obtener los datos del usuario
             $row = $result->fetch_assoc();
-            
-            // 9. Validar si la contraseña coincide (Temporalmente en texto plano)
+
+            // 9. Verificar la contraseña
             if ($password === $row['password']) {
-                // Credenciales correctas: Almacenamos datos del usuario en la Sesión
+
+                // Guardar los datos en la sesión
                 $_SESSION['user_id'] = $row['id'];
                 $_SESSION['nombre'] = $row['nombre_completo'];
                 $_SESSION['rol'] = $row['rol'];
-                
-                // Redirigir al usuario al Dashboard del sistema de inventario
-                header("Location: test_dashboard.php");
+
+                // Redirigir al Dashboard oficial
+                header("Location: dashboard.php");
                 exit();
+
             } else {
+
                 // Contraseña incorrecta
                 header("Location: index.php?error=1");
                 exit();
             }
+
         } else {
-            // Usuario no encontrado en el sistema
+
+            // Usuario no encontrado
             header("Location: index.php?error=1");
             exit();
         }
-        
-        // Cerrar la sentencia de forma ordenada
+
+        // Cerrar la consulta
         $stmt->close();
 
     } catch (mysqli_sql_exception $e) {
-        // Detener el script si hay un fallo crítico de SQL
+
+        // Mostrar error si ocurre un problema con MySQL
         die("Error de autenticación en el servidor: " . $e->getMessage());
     }
+
 } else {
-    // Si intentan entrar directo a la URL, los devolvemos al Login
+
+    // Si entran directamente al archivo, regresar al login
     header("Location: index.php");
     exit();
 }
+
 ?>
