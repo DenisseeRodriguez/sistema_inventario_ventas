@@ -35,7 +35,9 @@ $res_valor = $conn->query(
 $fila_valor = $res_valor->fetch_assoc();
 
 // Si la tabla está vacía, SUM devuelve NULL
-$capital_inventario = $fila_valor['capital'] ? $fila_valor['capital'] : 0;
+$capital_inventario = $fila_valor['capital']
+    ? $fila_valor['capital']
+    : 0;
 
 
 // ==========================================
@@ -48,7 +50,9 @@ $res_caro = $conn->query(
 $fila_caro = $res_caro->fetch_assoc();
 
 // Si no hay productos, colocamos 0
-$precio_maximo = $fila_caro['max_precio'] ? $fila_caro['max_precio'] : 0;
+$precio_maximo = $fila_caro['max_precio']
+    ? $fila_caro['max_precio']
+    : 0;
 
 ?>
 
@@ -165,7 +169,7 @@ $precio_maximo = $fila_caro['max_precio'] ? $fila_caro['max_precio'] : 0;
         }
 
         .modulo:hover {
-            background: #2563eb;
+            opacity: 0.9;
         }
 
     </style>
@@ -178,7 +182,9 @@ $precio_maximo = $fila_caro['max_precio'] ? $fila_caro['max_precio'] : 0;
     <div class="navbar">
 
         <h1>
+
             Bienvenido,
+
             <?php
             echo isset($_SESSION['nombre'])
                 ? htmlspecialchars($_SESSION['nombre'])
@@ -186,14 +192,19 @@ $precio_maximo = $fila_caro['max_precio'] ? $fila_caro['max_precio'] : 0;
             ?>
 
             <span style="font-size: 14px; color: #94a3b8;">
+
                 (Rol:
+
                 <?php
                 echo isset($_SESSION['rol'])
                     ? htmlspecialchars($_SESSION['rol'])
                     : 'Usuario';
                 ?>
+
                 )
+
             </span>
+
         </h1>
 
         <a href="logout.php" class="btn-salir">
@@ -204,9 +215,11 @@ $precio_maximo = $fila_caro['max_precio'] ? $fila_caro['max_precio'] : 0;
 
 
     <!-- Panel de Métricas Dinámicas -->
+
     <div class="tarjetas-container">
 
         <!-- Total de Productos -->
+
         <div class="tarjeta">
 
             <h3>Total de Productos</h3>
@@ -219,6 +232,7 @@ $precio_maximo = $fila_caro['max_precio'] ? $fila_caro['max_precio'] : 0;
 
 
         <!-- Capital Invertido -->
+
         <div class="tarjeta verde">
 
             <h3>Capital Invertido</h3>
@@ -231,6 +245,7 @@ $precio_maximo = $fila_caro['max_precio'] ? $fila_caro['max_precio'] : 0;
 
 
         <!-- Producto de Mayor Precio -->
+
         <div class="tarjeta naranja">
 
             <h3>Producto de Mayor Precio</h3>
@@ -267,6 +282,13 @@ $precio_maximo = $fila_caro['max_precio'] ? $fila_caro['max_precio'] : 0;
            class="modulo"
            style="background:#8b5cf6;">
             🚚 Módulo de Proveedores
+        </a>
+
+        <!-- Módulo de Nueva Compra -->
+        <a href="nueva_compra.php"
+           class="modulo"
+           style="background:#10b981;">
+            📥 Registrar Ingreso de Mercadería
         </a>
 
     </div>
