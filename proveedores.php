@@ -64,6 +64,17 @@ $resultado = $conn->query($sql);
             font-weight: bold;
         }
 
+        .btn-nuevo {
+            display: inline-block;
+            background: #3b82f6;
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -110,9 +121,8 @@ $resultado = $conn->query($sql);
     </div>
 
 
-    <!-- Botón preparado para la próxima clase -->
-    <a href="#"
-       style="background: #3b82f6; color: white; padding: 10px; text-decoration: none; border-radius: 5px; font-weight: bold;">
+    <!-- Botón para registrar un nuevo proveedor -->
+    <a href="nuevo_proveedor.php" class="btn-nuevo">
         + Nuevo Proveedor
     </a>
 
