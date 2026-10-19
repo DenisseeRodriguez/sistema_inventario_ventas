@@ -167,4 +167,33 @@ $resultado = $conn->query($sql);
                         ?>
                     </td>
 
-                   
+                    <td class="monto">
+                        $<?php echo number_format((float) $fila['total'], 2); ?>
+                    </td>
+
+                    <td>
+                        <a
+                            href="detalle_compra.php?id=<?php echo (int) $fila['numero_factura']; ?>"
+                            class="btn-detalle"
+                        >
+                            Ver Detalle
+                        </a>
+                    </td>
+                </tr>
+            <?php endwhile; ?>
+
+        <?php else: ?>
+            <tr>
+                <td colspan="6">
+                    No hay registros de compras disponibles.
+                </td>
+            </tr>
+        <?php endif; ?>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>
+
+                
